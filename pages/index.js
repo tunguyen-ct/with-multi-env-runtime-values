@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 
-export default function Home() {
+export default function Home({ title }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -13,8 +13,12 @@ export default function Home() {
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js</a> on Docker!
         </h1>
-        <h2 className={styles.title}>with Multiple Deployment Environments</h2>
+        <h2 className={styles.title}>with Multiple Deployment Environments: title: {title}</h2>
         <h3>API_URL: {process.env.NEXT_PUBLIC_API_URL}</h3>
+        <div>
+          <h2>RUNTIME ENV VALUES</h2>
+          <div>BASE_URL: {process.env.BASE_URL}</div>
+        </div>
         <p className={styles.description}>
           Get started by editing{' '}
           <code className={styles.code}>pages/index.js</code>
@@ -63,4 +67,13 @@ export default function Home() {
       </footer>
     </div>
   )
+}
+
+export async function getServerSideProps() {
+  console.log('getServerSideProps', process.env.BASE_DOMAIN)
+  return {
+    props: {
+      title: 'HomePage'
+    }
+  }
 }

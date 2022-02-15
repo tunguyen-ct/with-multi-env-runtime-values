@@ -8,3 +8,8 @@ services:
     image: with-docker-multi-env-development
     ports:
       - '3001:3000'
+    environment:
+      - BASE_DOMAIN=dev
+      - ENV=development
+      - ASSET_HOST=https://mycdn.com
+      - ANALYTICS_ID=UA-12345678-1
